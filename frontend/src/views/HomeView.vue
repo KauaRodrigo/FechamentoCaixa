@@ -44,21 +44,21 @@ function adicionarVenda(bDinheiro: boolean) {
 }
 
 function setDadosSessao() {
-   document.sessionStorage.setItem('iIngressosGeral', iIngressosGeral.value);
-   document.sessionStorage.setItem('iValorGeral', iValorGeral.value);
-   document.sessionStorage.setItem('iIngressosDinheiro', iIngressosDinheiro.value);
-   document.sessionStorage.setItem('iValorDinheiro', iValorDinheiro.value);
-   document.sessionStorage.setItem('iIngressosCartao', iIngressosCartao.value);
-   document.sessionStorage.setItem('iValorCartao', iValorCartao.value);   
+   window.sessionStorage.setItem('iIngressosGeral', iIngressosGeral.value);
+   window.sessionStorage.setItem('iValorGeral', iValorGeral.value);
+   window.sessionStorage.setItem('iIngressosDinheiro', iIngressosDinheiro.value);
+   window.sessionStorage.setItem('iValorDinheiro', iValorDinheiro.value);
+   window.sessionStorage.setItem('iIngressosCartao', iIngressosCartao.value);
+   window.sessionStorage.setItem('iValorCartao', iValorCartao.value);   
 }
 
 function getDadosSessao() {
-   iIngressosGeral.value = document.sessionStorage.getItem('iIngressosGeral');
-   iValorGeral.value = document.sessionStorage.getItem('iValorGeral');
-   iIngressosDinheiro.value = document.sessionStorage.getItem('iIngressosDinheiro');
-   iValorDinheiro.value = document.sessionStorage.getItem('iValorDinheiro');
-   iIngressosCartao.value = document.sessionStorage.getItem('iIngressosCartao');
-   iValorCartao.value = document.sessionStorage.getItem('iValorCartao');   
+   iIngressosGeral.value = window.sessionStorage.getItem('iIngressosGeral');
+   iValorGeral.value = window.sessionStorage.getItem('iValorGeral');
+   iIngressosDinheiro.value = window.sessionStorage.getItem('iIngressosDinheiro');
+   iValorDinheiro.value = window.sessionStorage.getItem('iValorDinheiro');
+   iIngressosCartao.value = window.sessionStorage.getItem('iIngressosCartao');
+   iValorCartao.value = window.sessionStorage.getItem('iValorCartao');   
 }
 </script>
 

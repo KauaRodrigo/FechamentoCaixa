@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { onBeforeMount, ref } from 'vue';
 
 const iIngresso = ref(0);
 const iIngressosGeral = ref(0);
@@ -9,6 +9,10 @@ const iValorDinheiro = ref(0);
 const iIngressosCartao = ref(0);
 const iValorCartao = ref(0);
 const iValorIngresso = ref(25);
+
+onBeforeMount(() => {
+   getDadosSessao();
+})
 
 function adicionar(): void {
    if(++iIngresso.value >= 10) {
@@ -29,12 +33,32 @@ function adicionarVenda(bDinheiro: boolean) {
    if(bDinheiro) {
       iValorDinheiro.value += iIngresso.value * iValorIngresso.value;
       iIngressosDinheiro.value += iIngresso.value;
+      setDadosSessao();
       return iIngresso.value = 0;
    }
    
    iValorCartao.value += iIngresso.value * iValorIngresso.value;
    iIngressosCartao.value += iIngresso.value;
    iIngresso.value = 0;
+   setDadosSessao();
+}
+
+function setDadosSessao() {
+   document.sessionStorage.setItem('iIngressosGeral', iIngressosGeral.value);
+   document.sessionStorage.setItem('iValorGeral', iValorGeral.value);
+   document.sessionStorage.setItem('iIngressosDinheiro', iIngressosDinheiro.value);
+   document.sessionStorage.setItem('iValorDinheiro', iValorDinheiro.value);
+   document.sessionStorage.setItem('iIngressosCartao', iIngressosCartao.value);
+   document.sessionStorage.setItem('iValorCartao', iValorCartao.value);   
+}
+
+function getDadosSessao() {
+   iIngressosGeral.value = document.sessionStorage.getItem('iIngressosGeral');
+   iValorGeral.value = document.sessionStorage.getItem('iValorGeral');
+   iIngressosDinheiro.value = document.sessionStorage.getItem('iIngressosDinheiro');
+   iValorDinheiro.value = document.sessionStorage.getItem('iValorDinheiro');
+   iIngressosCartao.value = document.sessionStorage.getItem('iIngressosCartao');
+   iValorCartao.value = document.sessionStorage.getItem('iValorCartao');   
 }
 </script>
 

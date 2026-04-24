@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import { onBeforeMount, ref } from 'vue';
 
 const iIngresso = ref(0);
@@ -14,19 +14,19 @@ onBeforeMount(() => {
    getDadosSessao();
 })
 
-function adicionar() {
+function adicionar(): void {
    if(++iIngresso.value >= 10) {
       iIngresso.value = 10;
    }   
 }
 
-function remover() {   
+function remover(): void {   
    if(--iIngresso.value <= 0) {
       iIngresso.value = 0;
    }   
 }
 
-function adicionarVenda(bDinheiro) {
+function adicionarVenda(bDinheiro: boolean) {
    iIngressosGeral.value += iIngresso.value;
    iValorGeral.value += iIngresso.value * iValorIngresso.value;
    
@@ -53,12 +53,12 @@ function setDadosSessao() {
 }
 
 function getDadosSessao() {
-   iIngressosGeral.value    = window.sessionStorage.getItem('iIngressosGeral');
-   iValorGeral.value        = window.sessionStorage.getItem('iValorGeral');
-   iIngressosDinheiro.value = window.sessionStorage.getItem('iIngressosDinheiro');
-   iValorDinheiro.value     = window.sessionStorage.getItem('iValorDinheiro');
-   iIngressosCartao.value   = window.sessionStorage.getItem('iIngressosCartao');
-   iValorCartao.value       = window.sessionStorage.getItem('iValorCartao');   
+   iIngressosGeral.value    = parseInt(window.sessionStorage.getItem('iIngressosGeral')?? '');
+   iValorGeral.value        = parseInt(window.sessionStorage.getItem('iValorGeral')?? '');
+   iIngressosDinheiro.value = parseInt(window.sessionStorage.getItem('iIngressosDinheiro')?? '');
+   iValorDinheiro.value     = parseInt(window.sessionStorage.getItem('iValorDinheiro')?? '');
+   iIngressosCartao.value   = parseInt(window.sessionStorage.getItem('iIngressosCartao')?? '');
+   iValorCartao.value       = parseInt(window.sessionStorage.getItem('iValorCartao')?? '');   
 }
 </script>
 

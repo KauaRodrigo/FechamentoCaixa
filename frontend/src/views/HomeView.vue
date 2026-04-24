@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup>
 import { onBeforeMount, ref } from 'vue';
 
 const iIngresso = ref(0);
@@ -14,19 +14,19 @@ onBeforeMount(() => {
    getDadosSessao();
 })
 
-function adicionar(): void {
+function adicionar() {
    if(++iIngresso.value >= 10) {
       iIngresso.value = 10;
    }   
 }
 
-function remover(): void {   
+function remover() {   
    if(--iIngresso.value <= 0) {
       iIngresso.value = 0;
    }   
 }
 
-function adicionarVenda(bDinheiro: boolean) {
+function adicionarVenda(bDinheiro) {
    iIngressosGeral.value += iIngresso.value;
    iValorGeral.value += iIngresso.value * iValorIngresso.value;
    
@@ -44,21 +44,21 @@ function adicionarVenda(bDinheiro: boolean) {
 }
 
 function setDadosSessao() {
-   window.sessionStorage.setItem('iIngressosGeral', iIngressosGeral.value);
-   window.sessionStorage.setItem('iValorGeral', iValorGeral.value);
-   window.sessionStorage.setItem('iIngressosDinheiro', iIngressosDinheiro.value);
-   window.sessionStorage.setItem('iValorDinheiro', iValorDinheiro.value);
-   window.sessionStorage.setItem('iIngressosCartao', iIngressosCartao.value);
-   window.sessionStorage.setItem('iValorCartao', iValorCartao.value);   
+   window.sessionStorage.setItem('iIngressosGeral', `${iIngressosGeral.value}`);
+   window.sessionStorage.setItem('iValorGeral', `${iValorGeral.value}`);
+   window.sessionStorage.setItem('iIngressosDinheiro', `${iIngressosDinheiro.value}`);
+   window.sessionStorage.setItem('iValorDinheiro', `${iValorDinheiro.value}`);
+   window.sessionStorage.setItem('iIngressosCartao', `${iIngressosCartao.value}`);
+   window.sessionStorage.setItem('iValorCartao', `${iValorCartao.value}`);   
 }
 
 function getDadosSessao() {
-   iIngressosGeral.value = window.sessionStorage.getItem('iIngressosGeral');
-   iValorGeral.value = window.sessionStorage.getItem('iValorGeral');
+   iIngressosGeral.value    = window.sessionStorage.getItem('iIngressosGeral');
+   iValorGeral.value        = window.sessionStorage.getItem('iValorGeral');
    iIngressosDinheiro.value = window.sessionStorage.getItem('iIngressosDinheiro');
-   iValorDinheiro.value = window.sessionStorage.getItem('iValorDinheiro');
-   iIngressosCartao.value = window.sessionStorage.getItem('iIngressosCartao');
-   iValorCartao.value = window.sessionStorage.getItem('iValorCartao');   
+   iValorDinheiro.value     = window.sessionStorage.getItem('iValorDinheiro');
+   iIngressosCartao.value   = window.sessionStorage.getItem('iIngressosCartao');
+   iValorCartao.value       = window.sessionStorage.getItem('iValorCartao');   
 }
 </script>
 

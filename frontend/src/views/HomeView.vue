@@ -64,20 +64,22 @@ function getDadosSessao() {
 
 <template>
   <div class="container">
-      <div class="caixa card">         
-         <h4>Ingressos Vendidos</h4>
-         <p>Quantidade: <span>{{ iIngressosGeral }}</span></p>
-         <p>Total: <span>R$ {{ iValorGeral.toFixed(2) }}</span></p>
-         <div class="card" id="ingressosDinheiro">
-            <h4>Dinheiro</h4>
-            <p>Quantidade: <span>{{ iIngressosDinheiro }}</span></p>
-            <p>Total: <span>R$ {{ iValorDinheiro.toFixed(2) }}</span></p>
-         </div>
-         <div class="card" id="ingressosCartao">
-            <h4>Cartão</h4>
-            <p>Quantidade: <span>{{ iIngressosCartao }}</span></p>
-            <p>Total: <span>R$ {{ iValorCartao.toFixed(2) }}</span></p>
-         </div>
+      <div class="caixa">
+         <div class="card" id="ingressosGeral">
+            <h4>Ingressos Vendidos</h4>
+            <p>Quantidade: <span>{{ iIngressosGeral }}</span></p>
+            <p>Total: <span>R$ {{ iValorGeral.toFixed(2) }}</span></p>
+            <div class="card" id="ingressosDinheiro">
+               <h4>Dinheiro</h4>
+               <p>Quantidade: <span>{{ iIngressosDinheiro }}</span></p>
+               <p>Total: <span>R$ {{ iValorDinheiro.toFixed(2) }}</span></p>
+            </div>
+            <div class="card" id="ingressosCartao">
+               <h4>Cartão</h4>
+               <p>Quantidade: <span>{{ iIngressosCartao }}</span></p>
+               <p>Total: <span>R$ {{ iValorCartao.toFixed(2) }}</span></p>
+            </div>
+         </div>         
       </div>
       <div class="quadroValores">
          <input type="radio" name="valor" value="25" id="normal" v-model="iValorIngresso">
@@ -102,44 +104,48 @@ function getDadosSessao() {
 <style scoped>
 .container {
    width: 90%;
-   margin: 10% auto;
+   margin: 0 auto;
+   padding: 10% 0;
+   height: 100%;
 }
 
 .card {
-   font-weight: bold;
+   display: flex;
+   flex-direction: column;
    border-radius: 10px;
-   width: 100%;
-   height: 100%;
+   padding: 10px;
    color: white;
-   padding: 5px;
+   text-shadow: 0px 0px 1px black;   
 }
 
 .caixa {
-   display: flex;
-   flex-direction: column;
-   background-color: rgba(255, 1, 1, 0.956);
-   padding: 10px;
-   color: black !important;
    margin-bottom: 20%;
 }
 
+.caixa p {
+   font-weight: bold;
+}
+
+#ingressosGeral {
+   background-color: rgb(105, 105, 105);
+   box-shadow: 1px 1px 5px 1px rgb(27, 27, 27);
+}
+
 #ingressosDinheiro {
-   background-color: rgb(0, 151, 0);
+   background-color: rgb(0, 140, 255);
    margin: 5px 0;
 }
 
 #ingressosCartao {
-   background-color: rgb(0, 60, 255);
+   background-color: rgb(0, 140, 255);
 }
 
 .quadroValores {
-   display: flex;   
+   display: flex;
+   width: 100%;
    justify-content: center;
-   margin-bottom: 10%;
    gap: 10px;
-   color: white;
-   font-weight: bold;
-   font-size: 1.3rem;
+   margin-bottom: 20%;
 }
 
 .quadroValores input {
@@ -147,48 +153,59 @@ function getDadosSessao() {
 }
 
 .quadroValores label {    
-   background-color: gray;
-   padding: 15px 5px;
    border-radius: 5px;
+   padding: 22px 5px;
+   background-color: rgb(105, 105, 105);
+   text-align: center;
+   font-weight: bold;
+   font-size: 1.3rem;
+   color: white;
 }
 
 .quadroValores input:checked + label {
-   background-color: rgb(0, 151, 0);
+   background-color: rgb(0, 140, 255);
+   box-shadow: inset 0px 0px 10px 1px black;
 }
 
 .acoes {
    display: flex;
+   flex-direction: column;
    align-items: center;
-   flex-direction: column;     
-   margin-bottom: 20%;
+   justify-content: center;   
+   height: 30%;
 }
 
 .botao {
-   gap: 25px; 
+   gap: 25px;
    width: 100%;
    display: flex;
    justify-content: center;
-   margin-bottom: 30%;
+   margin-bottom: 20%;
 }
 
 .botao button {
    padding: 20px;
-   border-radius: 60px;
-   border: 1px solid white;
-   outline: none;   
-   background-color: rgb(90, 90, 90);
+   border-radius: 100px;
+   border: 2px solid rgb(255, 255, 255, 0.479);
+   outline: none;
+   background-color: rgb(51,51,51,0.712);
    color: white;
    font-size: 3rem;
+}
+
+.botao button:active {
+   box-shadow: inset 0px 0px 10px 1px black;
 }
 
 .botao input {
    width: 25%;
    font-size: 4rem;
    background-color: transparent;
+   font-weight: bold;
    border: none;
    outline: none;
    text-align: center;
-   color: white;   
+   color: white;
 }
 
 .tipo {
@@ -207,5 +224,9 @@ function getDadosSessao() {
    font-size: 1.5rem;
    font-weight: bold;
    width: 100%;
+}
+
+.tipo button:active {
+   box-shadow: inset 1px 1px 10px 1px black;
 }
 </style>

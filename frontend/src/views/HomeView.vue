@@ -9,21 +9,19 @@ const iValorDinheiro = ref(0);
 const iIngressosCartao = ref(0);
 const iValorCartao = ref(0);
 const iValorIngresso = ref(25);
+const iValorPago = ref(0);
+const iTroco = ref(0);
 
 onBeforeMount(() => {
    getDadosSessao();
 })
 
 function adicionar(): void {
-   if(++iIngresso.value >= 10) {
-      iIngresso.value = 10;
-   }   
+   ++iIngresso.value;     
 }
 
 function remover(): void {   
-   if(--iIngresso.value <= 0) {
-      iIngresso.value = 0;
-   }   
+   --iIngresso.value;
 }
 
 function adicionarVenda(bDinheiro: boolean) {
@@ -60,6 +58,10 @@ function getDadosSessao() {
    iIngressosCartao.value   = parseInt(window.sessionStorage.getItem('iIngressosCartao')?? '0');
    iValorCartao.value       = parseInt(window.sessionStorage.getItem('iValorCartao')?? '0');   
 }
+
+function getTroco() {
+   iTroco.value = iValorPago.value - (iIngresso.value * iValorIngresso.value);
+}
 </script>
 
 <template>
@@ -68,16 +70,16 @@ function getDadosSessao() {
          <div class="card" id="ingressosGeral">
             <h4>Ingressos Vendidos</h4>
             <p>Quantidade: <span>{{ iIngressosGeral }}</span></p>
-            <p>Total: <span>R$ {{ iValorGeral.toFixed(2) }}</span></p>
+            <p>Total: <span>R$ {{ iValorGeral.toFixed(2).replace('.', ',') }}</span></p>
             <div class="card" id="ingressosDinheiro">
                <h4>Dinheiro</h4>
                <p>Quantidade: <span>{{ iIngressosDinheiro }}</span></p>
-               <p>Total: <span>R$ {{ iValorDinheiro.toFixed(2) }}</span></p>
+               <p>Total: <span>R$ {{ iValorDinheiro.toFixed(2).replace('.', ',') }}</span></p>
             </div>
             <div class="card" id="ingressosCartao">
                <h4>Cartão</h4>
                <p>Quantidade: <span>{{ iIngressosCartao }}</span></p>
-               <p>Total: <span>R$ {{ iValorCartao.toFixed(2) }}</span></p>
+               <p>Total: <span>R$ {{ iValorCartao.toFixed(2).replace('.', ',') }}</span></p>
             </div>
          </div>         
       </div>
@@ -90,8 +92,12 @@ function getDadosSessao() {
       <div class="acoes">
          <div class="botao">
             <button @click="remover()"><i class="fa fa-minus"></i></button>
-            <input readonly max="10" type="number" name="numeroIngressos" id="numeroIngressos" :value="iIngresso">
+            <input type="number" name="numeroIngressos" class="campoNumerico" id="numeroIngressos" v-model="iIngresso">
             <button @click="adicionar()"><i class="fa fa-plus"></i></button>      
+         </div>
+         <div class="botao">            
+            <input style="background-color: white; color: black; font-size: 1.2rem; height: 50px;" @blur="getTroco()" type="number" name="valorPago" class="campoNumerico" id="valorPago" v-model="iValorPago">
+            <input style="background-color: white; color: black; font-size: 1.2rem; height: 50px;" readonly type="number" name="troco" class="campoNumerico" id="troco" v-model="iTroco">
          </div>
          <div class="tipo">
             <button @click=adicionarVenda(true)>Dinheiro</button>
@@ -199,13 +205,14 @@ function getDadosSessao() {
 
 .botao input {
    width: 25%;
-   font-size: 4rem;
+   font-size: 2rem;
    background-color: transparent;
    font-weight: bold;
    border: none;
    outline: none;
    text-align: center;
    color: white;
+   caret-color: transparent;
 }
 
 .tipo {

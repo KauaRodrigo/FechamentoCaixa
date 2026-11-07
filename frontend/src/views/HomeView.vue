@@ -125,7 +125,7 @@ function getTroco() {
 }
 
 .caixa {
-   margin-bottom: 20%;
+   margin-bottom: 10%;
 }
 
 .caixa p {
@@ -151,7 +151,7 @@ function getTroco() {
    width: 100%;
    justify-content: center;
    gap: 10px;
-   margin-bottom: 20%;
+   margin-bottom: 10%;
 }
 
 .quadroValores input {
@@ -186,7 +186,7 @@ function getTroco() {
    width: 100%;
    display: flex;
    justify-content: center;
-   margin-bottom: 20%;
+   margin-bottom: 10%;
 }
 
 .botao button {

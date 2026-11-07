@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onBeforeMount, ref } from 'vue';
+import { onBeforeMount, ref, computed } from 'vue';
 
 const iIngresso = ref(0);
 const iIngressosGeral = ref(0);
@@ -10,7 +10,9 @@ const iIngressosCartao = ref(0);
 const iValorCartao = ref(0);
 const iValorIngresso = ref(25);
 const iValorPago = ref(0);
-const iTroco = ref(0);
+const iTroco = computed(() => {
+   return iValorPago.value - (iIngresso.value * iValorIngresso.value);
+});
 
 onBeforeMount(() => {
    getDadosSessao();
@@ -58,10 +60,6 @@ function getDadosSessao() {
    iIngressosCartao.value   = parseInt(window.sessionStorage.getItem('iIngressosCartao')?? '0');
    iValorCartao.value       = parseInt(window.sessionStorage.getItem('iValorCartao')?? '0');   
 }
-
-function getTroco() {
-   iTroco.value = iValorPago.value - (iIngresso.value * iValorIngresso.value);
-}
 </script>
 
 <template>
@@ -96,7 +94,7 @@ function getTroco() {
             <button @click="adicionar()"><i class="fa fa-plus"></i></button>      
          </div>
          <div class="botao">            
-            <input style="background-color: white; color: black; font-size: 1.2rem; height: 50px;" @blur="getTroco()" type="number" name="valorPago" class="campoNumerico" id="valorPago" v-model="iValorPago">
+            <input style="background-color: white; color: black; font-size: 1.2rem; height: 50px;" type="number" name="valorPago" class="campoNumerico" id="valorPago" v-model="iValorPago">
             <input style="background-color: white; color: black; font-size: 1.2rem; height: 50px;" readonly type="number" name="troco" class="campoNumerico" id="troco" v-model="iTroco">
          </div>
          <div class="tipo">
